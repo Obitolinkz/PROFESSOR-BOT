@@ -398,7 +398,7 @@ async def settings(client, message):
 
     settings = await get_settings(grp_id)
     if settings is not None:
-        buttons = [[[
+        buttons = [[
                 InlineKeyboardButton('Bᴜᴛᴛᴏɴ Sᴛʏʟᴇ', callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}'),
                 InlineKeyboardButton('Sɪɴɢʟᴇ' if settings["button"] else 'Dᴏᴜʙʟᴇ',  callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}')
                 ],[
