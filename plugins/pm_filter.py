@@ -194,7 +194,7 @@ async def pm_AutoFilter(client, msg, pmspoll=False):
             **locals()
         )
     else:
-        cap = f"📭 Hᴇʏs {message.from_user.mention} ʜᴇʀᴇ ᴀʀᴇ ᴛʜᴇ ʀᴇꜱᴜʟᴛꜱ ғᴏʀ ʏᴏᴜʀ ǫᴜᴇʀʏ {search}"
+        cap = f"\n<b>️📽️Rᴇǫᴜᴇsᴛᴇᴅ Mᴏᴠɪᴇ : </b> : {search}\n<b>👤Rᴇǫᴜᴇsᴛᴇᴅ ʙʏ : </b> : {message.from_user.mention}\n<b>👥Uᴘʟᴏᴀᴅᴇᴅ ʙʏ : : </b> : {message.chat.title}\n\n🚮<b>Tʜɪs Mᴇssᴀɢᴇ Wɪʟʟ ʙᴇ Dᴇʟᴇᴛᴇᴅ Aғᴛᴇʀ 5 Mɪɴᴜᴛᴇs."
     if imdb and imdb.get('poster'):
         try:
             hehe = await message.reply_photo(photo=imdb.get('poster'), caption=cap, quote=True, reply_markup=InlineKeyboardMarkup(btn))
@@ -264,7 +264,7 @@ async def pm_spoll_choker(msg):
     temp.PM_SPELL[str(msg.id)] = movielist
     btn = [[InlineKeyboardButton(text=movie.strip(), callback_data=f"pmspolling#{user}#{k}")] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="Close", callback_data=f'pmspolling#{user}#close_spellcheck')])
-    await msg.reply("🧐 Find anything related to that\n👇Did you mean any one of these?👇", reply_markup=InlineKeyboardMarkup(btn), quote=True)
+    await msg.reply("<b>🧐 Fɪɴᴅ Aɴʏᴛʜɪɴɢ Rᴇʟᴀᴛᴇᴅ Tᴏ Tʜᴀᴛ😑</b>\n\n<b>Dɪᴅ Yᴏᴜ Wᴀɴᴛ Aɴʏ Oғ Tʜᴇsᴇ</b>👇", reply_markup=InlineKeyboardMarkup(btn), quote=True)
 
 
 
