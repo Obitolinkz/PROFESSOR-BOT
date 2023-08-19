@@ -53,10 +53,6 @@ async def pm_next_page(bot, query):
         else:
             btn = [[InlineKeyboardButton(text=f"{file.file_name}", url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")),
                     InlineKeyboardButton(text=f"{get_size(file.file_size)}", url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}"))] for file in files ]
-        else:
-        btn.append(
-                [InlineKeyboardButton(text="⭕️ ℂℍ𝔼ℂ𝕂 ℙ𝕄 ⭕️", url=f"https://telegram.dog/{temp.U_NAME}")]
-            )
     else:        
         if SINGLE_BUTTON:
             btn = [[InlineKeyboardButton(text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'pmfile#{file.file_id}')] for file in files ]
@@ -149,10 +145,6 @@ async def pm_AutoFilter(client, msg, pmspoll=False):
         else:
             btn = [[InlineKeyboardButton(text=f"{file.file_name}", url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=pre_{file.file_id}")),
                     InlineKeyboardButton(text=f"{get_size(file.file_size)}", url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=pre_{file.file_id}"))] for file in files ]
-        else:
-        btn.append(
-                [InlineKeyboardButton(text="⭕️ ℂℍ𝔼ℂ𝕂 ℙ𝕄 ⭕️", url=f"https://telegram.dog/{temp.U_NAME}")]
-            ) 
     else:        
         if SINGLE_BUTTON:
             btn = [[InlineKeyboardButton(text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'{pre}#{file.file_id}')] for file in files ]
