@@ -373,8 +373,8 @@ async def pm_AutoFilter(client, msg, pmspoll=False):
     pre = 'pmfilep' if PROTECT_CONTENT else 'pmfile'
 
     if SHORT_URL and SHORT_API:          
-        if SINGLE_BUTTON:
-            btn = [
+    if SINGLE_BUTTON:
+        btn = [
             [
                 InlineKeyboardButton(
                     text=f"[{get_size(file.file_size)}] {file.file_name}", url=await get_shortlink(query.message.chat.id, f"https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}")
