@@ -68,29 +68,30 @@ async def pm_next_page(bot, query):
         off_set = offset - 10
     if n_offset == 0:
         btn.append(
-            [InlineKeyboardButton("⏪ BACK", callback_data=f"pmnext_{req}_{key}_{off_set}"),
-             InlineKeyboardButton(f"📃 Pages {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}", callback_data="pages")]                                  
+            [InlineKeyboardButton("⏪ BACK", callback_data=f"next_{req}_{key}_{off_set}"),
+             InlineKeyboardButton(f"📃 Pages {round(int(offset) / 10) + 1} / {round(total / 10)}",
+                                  callback_data="pages")]
         )
         btn.append(
-                [InlineKeyboardButton(text="⭕️ ℂℍ𝔼ℂ𝕂 ℙ𝕄 ⭕️", url=f"https://telegram.dog/{temp.U_NAME}")]
+                [InlineKeyboardButton(text="🤖 Cʜᴇᴄᴋ Bᴏᴛ 🤖", url=f"https://telegram.dog/{temp.U_NAME}")]
             )
     elif off_set is None:
         btn.append(
-            [InlineKeyboardButton(f"🗓 {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}", callback_data="pages"),
-             InlineKeyboardButton("NEXT ⏩", callback_data=f"pmnext_{req}_{key}_{n_offset}")])
+            [InlineKeyboardButton(f"🗓 {round(int(offset) / 10) + 1} / {round(total / 10)}", callback_data="pages"),
+             InlineKeyboardButton("𝗡𝗘𝗫𝗧 ⏩", callback_data=f"next_{req}_{key}_{n_offset}")])
         btn.append(
-                [InlineKeyboardButton(text="⭕️ ℂℍ𝔼ℂ𝕂 ℙ𝕄 ⭕️", url=f"https://telegram.dog/{temp.U_NAME}")]
+                [InlineKeyboardButton(text="🤖 Cʜᴇᴄᴋ Bᴏᴛ 🤖", url=f"https://telegram.dog/{temp.U_NAME}")]
             )
     else:
         btn.append(
             [
-                InlineKeyboardButton("⏪ BACK", callback_data=f"pmnext_{req}_{key}_{off_set}"),
-                InlineKeyboardButton(f"🗓 {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}", callback_data="pages"),
-                InlineKeyboardButton("NEXT ⏩", callback_data=f"pmnext_{req}_{key}_{n_offset}")
+                InlineKeyboardButton("⏪ BACK", callback_data=f"next_{req}_{key}_{off_set}"),
+                InlineKeyboardButton(f"🗓 {round(int(offset) / 10) + 1} / {round(total / 10)}", callback_data="pages"),
+                InlineKeyboardButton("𝗡𝗘𝗫𝗧 ⏩", callback_data=f"next_{req}_{key}_{n_offset}")
             ],
         )
         btn.append(
-                [InlineKeyboardButton(text="⭕️ ℂℍ𝔼ℂ𝕂 ℙ𝕄 ⭕️", url=f"https://telegram.dog/{temp.U_NAME}")]
+                [InlineKeyboardButton(text="🤖 Cʜᴇᴄᴋ Bᴏᴛ 🤖", url=f"https://telegram.dog/{temp.U_NAME}")]
             )
     try:
         await query.edit_message_reply_markup(
@@ -156,12 +157,18 @@ async def pm_AutoFilter(client, msg, pmspoll=False):
         temp.PM_BUTTONS[key] = search
         req = message.from_user.id if message.from_user else 0
         btn.append(
-            [InlineKeyboardButton(text=f"📄 𝗣𝗮𝗴𝗲 1/{math.ceil(int(total_results) / 6)}", callback_data="pages"),
-            InlineKeyboardButton(text="𝗡𝗲𝘅𝘁 ➡️", callback_data=f"pmnext_{req}_{key}_{offset}")]
+                [InlineKeyboardButton(text="🤖 Cʜᴇᴄᴋ Bᴏᴛ 🤖", url=f"https://telegram.dog/{temp.U_NAME}")]
+            )
+        btn.append(
+            [InlineKeyboardButton(text=f"🗓 1/{round(int(total_results) / 10)}", callback_data="pages"),
+             InlineKeyboardButton(text="𝗡𝗘𝗫𝗧 ⏩", callback_data=f"next_{req}_{key}_{offset}")]
         )
     else:
         btn.append(
-            [InlineKeyboardButton(text="📄 𝗣𝗮𝗴𝗲 1/1", callback_data="pages")]
+                [InlineKeyboardButton(text="🤖 Cʜᴇᴄᴋ Bᴏᴛ 🤖", url=f"https://telegram.dog/{temp.U_NAME}")]
+            )
+        btn.append(
+            [InlineKeyboardButton(text="🗓 1/1", callback_data="pages")]
         )
     if PM_IMDB:
         imdb = await get_poster(search)
@@ -203,7 +210,7 @@ async def pm_AutoFilter(client, msg, pmspoll=False):
             **locals()
         )
     else:
-        cap = f"\n<b>️📽️Rᴇǫᴜᴇsᴛᴇᴅ Mᴏᴠɪᴇ : </b> : {search}\n<b>👤Rᴇǫᴜᴇsᴛᴇᴅ ʙʏ : </b> : {message.from_user.mention}\n<b>👥Uᴘʟᴏᴀᴅᴇᴅ ʙʏ : : </b> : {message.chat.title}\n\n🚮<b>Tʜɪs Mᴇssᴀɢᴇ Wɪʟʟ ʙᴇ Dᴇʟᴇᴛᴇᴅ Aғᴛᴇʀ 5 Mɪɴᴜᴛᴇs."
+        cap = f"\n<b>️📽️Rᴇǫᴜᴇsᴛᴇᴅ Mᴏᴠɪᴇ : </b>  {search}\n<b>👤Rᴇǫᴜᴇsᴛᴇᴅ ʙʏ : </b>  {message.from_user.mention}\n<b>👥Uᴘʟᴏᴀᴅᴇᴅ ʙʏ :  </b>  {message.chat.title}\n\n🚮<b>Tʜɪs Mᴇssᴀɢᴇ Wɪʟʟ ʙᴇ Dᴇʟᴇᴛᴇᴅ Aғᴛᴇʀ 5 Mɪɴᴜᴛᴇs."
     if imdb and imdb.get('poster'):
         try:
             hehe = await message.reply_photo(photo=imdb.get('poster'), caption=cap, quote=True, reply_markup=InlineKeyboardMarkup(btn))
