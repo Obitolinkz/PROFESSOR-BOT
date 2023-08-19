@@ -323,7 +323,8 @@ async def advantage_spell_chok(msg):
     g_s += await search_gagala(msg.text)
     gs_parsed = []
     if not g_s:
-        k = await msg.reply("🤖 Checking.....") #IF not found movie.
+        k = await msg.reply("I couldn't find any movie in that name.")
+        await asyncio.sleep(8)
         await k.delete()
         return
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE)  # look for imdb / wiki results
@@ -351,11 +352,11 @@ async def advantage_spell_chok(msg):
     movielist += [(re.sub(r'(\-|\(|\)|_)', '', i, flags=re.IGNORECASE)).strip() for i in gs_parsed]
     movielist = list(dict.fromkeys(movielist))  # removing duplicates
     if not movielist:
-        k = await msg.reply(".")   #if not found at IMDB
-        await asyncio.sleep(1)
+        k = await msg.reply("I couldn't find anything related to that. Check your spelling")
+        await asyncio.sleep(8)
         await k.delete()
         return
-    SPELL_CHECK[msg.message_id] = movielist
+    temp.GP_SPELL[msg.id] = movielist
     btn = [[
         InlineKeyboardButton(
             text=movie.strip(),
@@ -363,13 +364,13 @@ async def advantage_spell_chok(msg):
         )
     ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="❌ Close", callback_data=f'spolling#{user}#close_spellcheck')])
-    await msg.reply("<b>🧐 Fɪɴᴅ Aɴʏᴛʜɪɴɢ Rᴇʟᴀᴛᴇᴅ Tᴏ Tʜᴀᴛ😑</b>\n\n👇<b>Dɪᴅ Yᴏᴜ Wᴀɴᴛ Aɴʏ Oғ Tʜᴇsᴇ</b>👇",
+    await msg.reply("<b><b>🧐 Fɪɴᴅ Aɴʏᴛʜɪɴɢ Rᴇʟᴀᴛᴇᴅ Tᴏ Tʜᴀᴛ😑</b>\n\n👇<b>Dɪᴅ Yᴏᴜ Wᴀɴᴛ Aɴʏ Oғ Tʜᴇsᴇ</b>👇",
                     reply_markup=InlineKeyboardMarkup(btn))
 
 async def manual_filters(client, message, text=False):
     group_id = message.chat.id
     name = text or message.text
-    reply_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
+    reply_id = message.reply_to_message.id if message.reply_to_message else message.id
     keywords = await get_filters(group_id)
     for keyword in reversed(sorted(keywords, key=len)):
         pattern = r"( |^|[^\w])" + re.escape(keyword) + r"( |$|[^\w])"
@@ -383,73 +384,30 @@ async def manual_filters(client, message, text=False):
                 try:
                     if fileid == "None":
                         if btn == "[]":
-                            dd = await message.reply_text(
-                             reply_text.format(
-                                 first = message.from_user.first_name,
-                                 username = None if not message.from_user.username else '@' + message.from_user.username,
-                                 mention = message.from_user.mention,
-                                 id = message.from_user.id,
-                                 dcid = message.from_user.dc_id,
-                                 chatname = message.chat.title,
-                                 query = name
-                             ),
-                             group_id,
-                             disable_web_page_preview=True,
-                             reply_to_message_id=reply_id
-                            )
-                            await asyncio.sleep(7200)
-                            await dd.edit(f"\n \n⚙️ Result  Closed ️")
+                            await client.send_message(group_id, reply_text, disable_web_page_preview=True, reply_to_message_id=reply_id)
                         else:
                             button = eval(btn)
-                            mm = await message.reply_text(
-                                reply_text.format(
-                                    first = message.from_user.first_name,
-                                    username = None if not message.from_user.username else '@' + message.from_user.username,
-                                    mention = message.from_user.mention,
-                                    id = message.from_user.id,
-                                    dcid = message.from_user.dc_id,
-                                    chatname = message.chat.title,
-                                    query = name
-                                ),
+                            await client.send_message(
                                 group_id,
+                                reply_text,
                                 disable_web_page_preview=True,
                                 reply_markup=InlineKeyboardMarkup(button),
-                                reply_to_message_id = reply_id
+                                reply_to_message_id=reply_id
                             )
-                            await asyncio.sleep(7200)
-                            await mm.edit(f"\n \n⚙️ Result  Closed ️")
                     elif btn == "[]":
                         await client.send_cached_media(
                             group_id,
                             fileid,
-                            caption=reply_text.format(
-                                first = message.from_user.first_name,
-                                last = message.from_user.last_name,
-                                username = None if not message.from_user.username else '@' + message.from_user.username,
-                                mention = message.from_user.mention,
-                                id = message.from_user.id,
-                                dcid = message.from_user.dc_id,
-                                chatname = message.chat.title,
-                                query = name
-                            ) or "",
-                            reply_to_message_id = reply_id
+                            caption=reply_text or "",
+                            reply_to_message_id=reply_id
                         )
                     else:
-                        button = eval(btn) 
+                        button = eval(btn)
                         await message.reply_cached_media(
                             fileid,
-                            caption=reply_text.format(
-                                first=message.from_user.first_name,
-                                last=message.from_user.last_name,
-                                username = None if not message.from_user.username else '@' + message.from_user.username,
-                                mention = message.from_user.mention,
-                                id=message.from_user.id,
-                                dcid = message.from_user.dc_id,
-                                chatname = message.chat.title,
-                                query = name
-                            ) or "",
+                            caption=reply_text or "",
                             reply_markup=InlineKeyboardMarkup(button),
-                            reply_to_message_id = reply_id
+                            reply_to_message_id=reply_id
                         )
                 except Exception as e:
                     logger.exception(e)
