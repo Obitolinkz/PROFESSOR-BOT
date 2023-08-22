@@ -526,15 +526,14 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
     elif query.data == "start":                        
         buttons = [[
-            InlineKeyboardButton("📣Mᴏᴠɪᴇ's Cʜᴀɴɴᴇʟ📣", url="https://t.me/Body_Soda_Links"), 
-            InlineKeyboardButton("📢Rᴇǫᴜᴇsᴛ Gʀᴏᴜᴘ📢", url="https://t.me/Body_Soda_Updates")
+            InlineKeyboardButton("➕Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ➕", url=f"http://t.me/{temp.U_NAME}?startgroup=true")
             ],[
-            InlineKeyboardButton("🔍Iɴʟɪɴᴇ & Sᴇᴀʀᴄʜ 🔍", switch_inline_query_current_chat='')
-            ],[
+            InlineKeyboardButton("🔍Iɴʟɪɴᴇ Sᴇᴀʀᴄʜ🔍", switch_inline_query_current_chat='')
+            ],[      
             InlineKeyboardButton("🀄️ Hᴇʟᴘ & Sᴜᴘᴘᴏʀᴛ 🀄️", callback_data="help"),
             InlineKeyboardButton("🔰Aʙᴏᴜᴛ & Iɴғᴏ🔰", callback_data="about")
             ],[
-            InlineKeyboardButton('❌ Cʟᴏsᴇ ❌', callback_data='close_data')
+            InlineKeyboardButton('❌ Cʟᴏsᴇ', callback_data='close_data')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.edit_message_media(
