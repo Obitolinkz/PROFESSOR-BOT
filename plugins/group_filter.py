@@ -134,6 +134,8 @@ async def next_page(bot, query):
              InlineKeyboardButton(f'📟 ᴍᴏᴠɪᴇ', 'minfo'),
              InlineKeyboardButton(f'🔰 sᴇʀɪᴇs', 'sinfo')
          ]
+    )
+
     if 0 < offset <= 10:
         off_set = 0
     elif offset == 0:
