@@ -339,7 +339,7 @@ Delete A Lot Of Messages From Groups!
 ᴇxᴀᴍᴘʟᴇ : Uncharted
 🚯 ᴅᴏɴᴛ ᴜꜱᴇ ➠ ':(!,./)"""
 
-     SINFO = """
+    SINFO = """
 ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯
 ꜱᴇʀɪᴇꜱ ʀᴇǫᴜᴇꜱᴛ ꜰᴏʀᴍᴀᴛ
 ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯
@@ -347,7 +347,3 @@ Delete A Lot Of Messages From Groups!
 ᴇxᴀᴍᴘʟᴇ : Loki S01E01
 🚯 ᴅᴏɴᴛ ᴜꜱᴇ ➠ ':(!,./)"""
     
-
-
-    
-
