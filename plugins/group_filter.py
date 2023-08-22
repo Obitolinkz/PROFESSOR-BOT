@@ -111,8 +111,8 @@ async def next_page(bot, query):
             ]
             for file in files
         ]
-    else:
-        btn = [
+        else:
+            btn = [
             [
                 InlineKeyboardButton(
                     text=f"{file.file_name}", callback_data=f'files#{file.file_id}'
